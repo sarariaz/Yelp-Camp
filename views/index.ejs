@@ -11,7 +11,7 @@
 
 </header>
 
-
+<!---
 <div class="row text-center" style="display : flex ; flex-wrap:wrap;">
     <% campgrounds.forEach(function(campgrounds){ %>
     <div class="col-md-3 col-sm-6">
@@ -28,7 +28,23 @@
      </div>
     </div>
   <%  }); %>
+</div> <!-->
+
+
+
+<div class="card" style="width: 40rem; margin: 0 auto; ">
+  <% campgrounds.forEach(function(campgrounds){ %>
+  <img src="<%= campgrounds.image %>" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title"> <%= campgrounds.name %>  </h5>
+    <a href="/campgrounds/<%= campgrounds._id %> " class="btn btn-primary"> More Information</a>
+  </div>
+  
+<%  }); %>
 </div>
 
-  <% include partials/footer %>
 </div>
+
+
+  <% include partials/footer %>
+

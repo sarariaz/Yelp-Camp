@@ -1,6 +1,9 @@
 var express = require("express");
 var app = express();
 var mongoose = require("mongoose");
+var Campground = require("./models/campground"); // we are importing campground schema from campground.js
+var seedDB = require("./seeds");
+seedDB(); // means that we are exporting a FUNCTION
 
 mongoose.connect("mongodb://localhost:27017/yelp_camp", { useNewUrlParser: true});
 app.set("view engine", "ejs");
@@ -8,15 +11,7 @@ var bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({extended: true}));
 
 
-//Schema Setup
- var campgroundSchema = new mongoose.Schema(
-     {
-         name: String,
-         image: String,
-         description: String
-     }
- );
-  var Campground = mongoose.model("Campground", campgroundSchema);
+
 //creating a new campground
  
 /*Campground.create({
@@ -81,9 +76,11 @@ app.get("/campgrounds/new", function(req , res){
     res.render("new");
 });
 
+// SHOWS MORE INFORMATION ABOUT ONE CAMPGROUND
+
 app.get("/campgrounds/:id", function(req, res){
     //find the campground with provided id
-    Campground.findById(req.params.id , function(err, foundCampground){
+    Campground.findById(req.params.id).populate("comments").exec(function(err, foundCampground){ // we used .populate to translate the id comments.
         if(err){
             console.log(err);
         }

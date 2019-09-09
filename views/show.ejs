@@ -1,10 +1,31 @@
 <%  include partials/header %>
-<h1> <%= campground.name %> </h1>
+<!--<h1> <%= campground.name %> </h1>
 <img src=" <%= campground.image %>">
 <p>
     <%= campground.description %>
 </p>
 
+<% campground.comments.forEach(function(comment){ %>
+    <p>
+        <strong> <%= comment.author %>  </strong> - <%= comment.text %>
+    </p>
 
+<% }) %> <!-->
+
+<div class="card" style="width: 50rem; margin: 0 auto; padding: 20px;">
+    <img src="<%= campground.image %>" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title"> <%= campground.name %>  </h5>
+      <p class="card-text">  <%= campground.description %> </p>
+      
+      <% campground.comments.forEach(function(comment){ %>
+        <p>
+            <strong> <%= comment.author %>  </strong> - <%= comment.text %>
+        </p>
+      <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+  </div>
+
+  <% }) %>
 
 <% include partials/footer %>
